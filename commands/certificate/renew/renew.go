@@ -1,8 +1,8 @@
 package renew
 
 import (
-	"aka-dcm-cli/commands/common"
-	"aka-dcm-cli/utilities"
+	"akc-dcm-cli/commands/common"
+	"akc-dcm-cli/utilities"
 	"github.com/fatih/color"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"

@@ -1,4 +1,4 @@
-module aka-dcm-cli
+module akc-dcm-cli
 
 go 1.13
 

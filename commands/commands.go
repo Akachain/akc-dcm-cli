@@ -1,8 +1,8 @@
 package commands
 
 import (
-	"aka-dcm-cli/commands/certificate"
-	"aka-dcm-cli/commands/version"
+	"akc-dcm-cli/commands/certificate"
+	"akc-dcm-cli/commands/version"
 	"github.com/spf13/cobra"
 )
 

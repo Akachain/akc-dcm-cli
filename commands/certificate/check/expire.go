@@ -1,8 +1,8 @@
 package check
 
 import (
-	"aka-dcm-cli/commands/common"
-	"aka-dcm-cli/utilities"
+	"akc-dcm-cli/commands/common"
+	"akc-dcm-cli/utilities"
 	"fmt"
 	"github.com/fatih/color"
 	"github.com/pkg/errors"

@@ -1,8 +1,8 @@
 package inspect
 
 import (
-	"aka-dcm-cli/commands/common"
-	"aka-dcm-cli/utilities"
+	"akc-dcm-cli/commands/common"
+	"akc-dcm-cli/utilities"
 	"fmt"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"

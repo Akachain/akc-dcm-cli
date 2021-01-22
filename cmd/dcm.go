@@ -1,7 +1,7 @@
 package main
 
 import (
-	"aka-dcm-cli/commands"
+	"akc-dcm-cli/commands"
 	"github.com/spf13/cobra"
 	"os"
 )

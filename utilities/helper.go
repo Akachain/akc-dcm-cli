@@ -1,7 +1,7 @@
 package utilities
 
 import (
-	"aka-dcm-cli/glossary"
+	"akc-dcm-cli/glossary"
 	"bytes"
 	"crypto"
 	"crypto/ecdsa"

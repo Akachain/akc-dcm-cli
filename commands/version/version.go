@@ -1,8 +1,8 @@
 package version
 
 import (
-	"aka-dcm-cli/glossary"
-	"aka-dcm-cli/glossary/metadata"
+	"akc-dcm-cli/glossary"
+	"akc-dcm-cli/glossary/metadata"
 	"errors"
 	"fmt"
 	"github.com/spf13/cobra"

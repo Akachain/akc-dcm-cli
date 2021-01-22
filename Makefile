@@ -6,8 +6,8 @@ LINT_CMD	?= gobin -run github.com/golangci/golangci-lint/cmd/golangci-lint@v1.19
 BIN_DIR := $(CURDIR)/bin
 CMD_DIR := $(CURDIR)/cmd
 
-PROJECT_NAME = Akachain/aka-dcm-cli
-PKGNAME = github.com/$(PROJECT_NAME)
+PROJECT_NAME = akc-dcm-cli
+PKGNAME = $(PROJECT_NAME)
 
 EXTRA_VERSION ?= $(shell git rev-parse --short HEAD)
 
@@ -24,7 +24,6 @@ all: clean build
 .PHONY: clean
 clean:
 	rm -rf $(BIN_DIR)
-	find . -name "mocks" -type d -print0 | xargs -0 /bin/rm -rf
 
 .PHONY: generate
 generate:
