@@ -4,7 +4,7 @@
 2. Run make
 3. Locate the binary in the bin directory
 4. Add the binary to your PATH
-5. Execute fabric for more information
+5. Execute dcm for more information
 ## II. Commands Reference.
 ```shell
 dcm [command]
@@ -72,7 +72,6 @@ dcm certificate check -c=../data/peer/output/renew-peer-cert.pem
 ```
 
 #### b. Folder certificate.
-```shell script
 ```shell script
 dcm certificate check -f=../data/peer/output
 ```
