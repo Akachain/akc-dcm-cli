@@ -83,7 +83,7 @@ func (c *ReNewCommand) Run() error {
 		return err
 	}
 
-	parentCert, err := utilities.ParseCertificate(c.ParenCertPath)
+	parentCert, _, err := utilities.ParseCertificate(c.ParenCertPath)
 	if err != nil {
 		return err
 	}
@@ -94,7 +94,7 @@ func (c *ReNewCommand) Run() error {
 		return err
 	}
 
-	oldCert, err := utilities.ParseCertificate(c.OldCertPath)
+	oldCert, isJson, err := utilities.ParseCertificate(c.OldCertPath)
 	if err != nil {
 		return err
 	}
@@ -108,10 +108,24 @@ func (c *ReNewCommand) Run() error {
 		return err
 	}
 
-	err = utilities.WriteFileToLocal(c.OutputPath, newCert.Bytes())
-	if err != nil {
-		return err
+	// handle support json format cert
+	if !isJson {
+		err = utilities.WriteFileToLocal(c.OutputPath, newCert.Bytes())
+		if err != nil {
+			return err
+		}
+	} else {
+		jCert, err := utilities.ParseJsonCert(c.OldCertPath)
+		if err != nil {
+			return err
+		}
+		jCert.Enrollment.Identity.Certificate = newCert.String()
+		err = utilities.WriteJsonFileToLocal(c.OutputPath, jCert)
+		if err != nil {
+			return err
+		}
 	}
+
 	color.Green("Renew Certificate Success...")
 
 	return nil

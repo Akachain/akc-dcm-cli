@@ -2,7 +2,6 @@ package check
 
 import (
 	"akc-dcm-cli/commands/common"
-	"akc-dcm-cli/glossary"
 	"akc-dcm-cli/utilities"
 	"fmt"
 	"github.com/fatih/color"
@@ -10,7 +9,6 @@ import (
 	"github.com/spf13/cobra"
 	"os"
 	"path/filepath"
-	"regexp"
 	"time"
 )
 
@@ -61,16 +59,12 @@ func (c *ExpireCommand) Run() error {
 	if len(c.CertPath) > 0 {
 		return checkExpireCert(c.CertPath)
 	} else {
-		certRegex, err := regexp.Compile(glossary.RegexCertName)
-		if err != nil {
-			return errors.WithMessage(err, "Failed to compile certificate regex")
-		}
-		err = filepath.Walk(c.FolderPath, func(path string, info os.FileInfo, err error) error {
+		err := filepath.Walk(c.FolderPath, func(path string, info os.FileInfo, err error) error {
 			if err != nil {
 				return errors.WithMessage(err, "Failed to scan certificate dir")
 			}
-			if certRegex.MatchString(info.Name()) {
-				err := checkExpireCert(path)
+			if !info.IsDir() {
+				err = checkExpireCert(path)
 				if err != nil {
 					fmt.Println(fmt.Sprintf("Unable to check expire date of \"%s\" certificate", path))
 				}
@@ -85,7 +79,7 @@ func (c *ExpireCommand) Run() error {
 }
 
 func checkExpireCert(certPath string) error {
-	cert, err := utilities.ParseCertificate(certPath)
+	cert, _, err := utilities.ParseCertificate(certPath)
 	if err != nil {
 		return err
 	}

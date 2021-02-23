@@ -50,9 +50,17 @@ func (c *InspectCommand) Validate() error {
 
 // Run executes the command
 func (c *InspectCommand) Run() error {
-	cert, err := utilities.ParseCertificate(c.CertPath)
+	cert, isJson, err := utilities.ParseCertificate(c.CertPath)
 	if err != nil {
 		return err
+	}
+
+	if isJson {
+		jCert, err := utilities.ParseJsonCert(c.CertPath)
+		if err != nil {
+			return err
+		}
+		fmt.Println(fmt.Sprintf("Signing Identity: %s", jCert.Enrollment.SigningIdentity))
 	}
 
 	textFormat, err := utilities.CertificateText(cert)
