@@ -1,6 +1,7 @@
 package utilities
 
 import (
+	"akc-dcm-cli/glossary"
 	"bytes"
 	"crypto/dsa"
 	"crypto/ecdsa"
@@ -519,6 +520,9 @@ func CertificateText(cert *x509.Certificate) (string, error) {
 				} else {
 					buf.WriteString(fmt.Sprintf("%12sNetscape Comment:\n%16s%s\n", "", "", comment))
 				}
+			} else if ext.Id.Equal(glossary.FabricComment) {
+				buf.WriteString(fmt.Sprintf("%12s%s\n", "", ext.Id.String()))
+				buf.WriteString(fmt.Sprintf("%16s%s\n", "", string(ext.Value)))
 			} else {
 				buf.WriteString(fmt.Sprintf("%12sUnknown extension %s\n", "", ext.Id.String()))
 			}

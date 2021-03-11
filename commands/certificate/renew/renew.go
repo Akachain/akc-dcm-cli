@@ -2,6 +2,7 @@ package renew
 
 import (
 	"akc-dcm-cli/commands/common"
+	"akc-dcm-cli/glossary"
 	"akc-dcm-cli/utilities"
 	"github.com/fatih/color"
 	"github.com/pkg/errors"
@@ -101,6 +102,13 @@ func (c *ReNewCommand) Run() error {
 
 	// renew certificate
 	oldCert.NotAfter = time.Now().AddDate(0, 0, c.Day)
+
+	// work around for fabric extension
+	for _, ext := range oldCert.Extensions {
+		if ext.Id.Equal(glossary.FabricComment) {
+			oldCert.ExtraExtensions = append(oldCert.ExtraExtensions, ext)
+		}
+	}
 
 	// generate new certificate
 	newCert, err := utilities.GenerateCertificate(oldCert, parentCert, privateKey, parentPrivKey)
