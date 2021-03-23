@@ -1,4 +1,4 @@
-PROJECT_VERSION=1.1
+PROJECT_VERSION=1.1.1
 
 GO_CMD		?= go
 LINT_CMD	?= gobin -run github.com/golangci/golangci-lint/cmd/golangci-lint@v1.19.1
