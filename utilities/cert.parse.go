@@ -129,3 +129,31 @@ func IsJsonCert(jsonCertPath string) bool {
 	var js json.RawMessage
 	return json.Unmarshal(certByte, &js) == nil
 }
+
+func VerifyKey(privateKey crypto.PrivateKey, publicKey crypto.PublicKey) error {
+	switch privateKey.(type) {
+	case *rsa.PrivateKey:
+		privateKey, ok := privateKey.(*rsa.PrivateKey)
+		if !ok {
+			return errors.New("VerifyKey - Unable to convert to type RSA")
+		}
+
+		if !privateKey.Public().(*rsa.PublicKey).Equal(publicKey) {
+			return errors.New("VerifyKey - Private key and public key not a pair")
+		}
+		break
+	case *ecdsa.PrivateKey:
+		privateKey, ok := privateKey.(*ecdsa.PrivateKey)
+		if !ok {
+			return errors.New("VerifyKey - Unable to convert to type RSA")
+		}
+
+		if !privateKey.Public().(*ecdsa.PublicKey).Equal(publicKey) {
+			return errors.New("Private key and public key not match")
+		}
+		break
+	default:
+		return errors.New("VerifyKey - Unsupported type private key")
+	}
+	return nil
+}

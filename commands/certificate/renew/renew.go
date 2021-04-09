@@ -103,6 +103,11 @@ func (c *ReNewCommand) Run() error {
 	// renew certificate
 	oldCert.NotAfter = time.Now().AddDate(0, 0, c.Day)
 
+	// verify private/public key pair
+	if err := utilities.VerifyKey(privateKey, oldCert.PublicKey); err != nil {
+		return err
+	}
+
 	// work around for fabric extension
 	for _, ext := range oldCert.Extensions {
 		if ext.Id.Equal(glossary.FabricComment) {
