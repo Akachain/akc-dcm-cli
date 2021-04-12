@@ -89,6 +89,11 @@ func (c *ReNewCommand) Run() error {
 		return err
 	}
 
+	// verify private/public key pair of parent cert
+	if err := utilities.VerifyKey(parentPrivKey, parentCert.PublicKey); err != nil {
+		return err
+	}
+
 	// parse old certificate information
 	privateKey, err := utilities.ParsePrivateKey(c.PrivKeyOldCertPath)
 	if err != nil {
@@ -103,7 +108,7 @@ func (c *ReNewCommand) Run() error {
 	// renew certificate
 	oldCert.NotAfter = time.Now().AddDate(0, 0, c.Day)
 
-	// verify private/public key pair
+	// verify private/public key pair of children cert
 	if err := utilities.VerifyKey(privateKey, oldCert.PublicKey); err != nil {
 		return err
 	}
