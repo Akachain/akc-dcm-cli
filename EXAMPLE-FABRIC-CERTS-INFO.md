@@ -118,14 +118,10 @@ In efs pod:
 In efs pod:
     ```bash
     # Peer
-    /tmp/artifact/${CLUSTER_NAME}/akc-ca-data/crypto-config/peerOrganizations/${ORG_DOMAIN}/peers/peer0.${ORG_DOMAIN}/msp/signcerts/cert.pem
-    /tmp/artifact/${CLUSTER_NAME}/akc-ca-data/orgs/peer0-akc/msp/keystore/cert.pem
     /tmp/artifact/${CLUSTER_NAME}/akc-ca-data/crypto-config/peerOrganizations/${ORG_DOMAIN}/peers/peer0.${ORG_DOMAIN}/tls/server.crt
     /tmp/artifact/${CLUSTER_NAME}/akc-ca-data/orgs/peer0-akc/tls/server.crt
 
     # Orderer
-    /tmp/artifact/${CLUSTER_NAME}/akc-ca-data/crypto-config/ordererOrganizations/${ORDERER_DOMAIN}/orderers/orderer0-${ORDERER_NAME}.${ORDERER_DOMAIN}/msp/signcerts/cert.pem
-    /tmp/artifact/${CLUSTER_NAME}/akc-ca-data/orgs/${ORDERER_NAME}/msp/signcerts/cert.pem
     /tmp/artifact/${CLUSTER_NAME}/akc-ca-data/crypto-config/ordererOrganizations/${ORDERER_DOMAIN}/orderers/orderer0-${ORDERER_NAME}.${ORDERER_DOMAIN}/tls/server.crt
     /tmp/artifact/${CLUSTER_NAME}/akc-ca-data/orgs/${ORDERER_NAME}/tls/server.crt
     ```
@@ -133,9 +129,9 @@ In efs pod:
 In efs pod:
     ```bash
     # Peer
-    /tmp/artifact/${CLUSTER_NAME}/akc-ca-data/crypto-config/peerOrganizations/${ORG_DOMAIN}/peers/peer0.${ORG_DOMAIN}/msp/keystore/key.pem
+    /tmp/artifact/${CLUSTER_NAME}/akc-ca-data/crypto-config/peerOrganizations/${ORG_DOMAIN}/peers/peer0.${ORG_DOMAIN}/tls/server.key
     # Orderer
-    /tmp/artifact/${CLUSTER_NAME}/akc-ca-data/crypto-config/ordererOrganizations/${ORDERER_DOMAIN}/orderers/orderer0-${ORDERER_NAME}.${ORDERER_DOMAIN}/msp/keystore/key.pem
+    /tmp/artifact/${CLUSTER_NAME}/akc-ca-data/crypto-config/ordererOrganizations/${ORDERER_DOMAIN}/orderers/orderer0-${ORDERER_NAME}.${ORDERER_DOMAIN}/tls/server.key
     ```
 6. User is used by peer/cli
 - Expire in: 1 year
